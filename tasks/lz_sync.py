@@ -1,6 +1,5 @@
 import os
 import re
-import time
 import wget
 import requests
 from lanzou.api import LanZouCloud
