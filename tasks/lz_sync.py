@@ -69,7 +69,7 @@ def show_progress(file_name, total_size, now_size):
 # 上传lzCloud
 @retry(InvalidStatus,delay=5,tries=3)
 def upload(file_name, lzy):
-    if lzy.upload_file(file_name, 3864551, callback=show_progress) != LanZouCloud.SUCCESS:
+    if lzy.upload_file(file_name, 3864551) != LanZouCloud.SUCCESS:
         raise InvalidStatus("上传失败,尝试重传!")
     else:
         print("上传成功!")
@@ -89,7 +89,8 @@ def pre_upload(download_info):
             print("当前已是最新版本,无需重传.")
         else:
             print("下载最新版本"+download_info[0])
-            wget.download(download_info[1], bar=bar_progress)
+            wget.download(download_info[1])
+            print("下载最新版本完成.")
             print("开始上传.")
             upload(download_info[0], lzy)
     else:
